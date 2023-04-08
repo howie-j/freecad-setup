@@ -1,0 +1,19 @@
+def main():
+	load_all_workbenches()
+
+	commands = Gui.listCommands()
+	for command in commands:
+		shortcut = Gui.Command.get(command).getShortcut()
+		if ("0" <= shortcut <= "6") and "Std_View" in command:
+			Gui.Command.get(command).setShortcut("")
+			print(command)
+
+
+def load_all_workbenches():
+	workbenches = Gui.listWorkbenches()
+
+	for wb in workbenches:
+		Gui.activateWorkbench(wb)
+
+
+main()
