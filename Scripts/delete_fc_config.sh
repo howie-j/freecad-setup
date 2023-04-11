@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Delete all FreeCAD config folders and files
 
