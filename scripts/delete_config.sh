@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Delete all FreeCAD config folders and files
-
+# delete all freecad config folders and files
 rm -rfv ~/.local/share/FreeCAD
 rm -rfv ~/.config/FreeCAD
 rm -rfv ~/.cache/FreeCAD
