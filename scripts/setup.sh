@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # reset config to default howie config
-sh reset_config.sh
+sh ${0%/*}/reset_config.sh
 
 # install addons
-sh install_addons.sh
+sh ${0%/*}/install_addons.sh
