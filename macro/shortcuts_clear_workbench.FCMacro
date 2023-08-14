@@ -1,0 +1,21 @@
+wb_to_clear = ['Sketcher_', 'Arch_', 'Path_', 'Draft_', 'Robot_']
+
+def main():
+	load_all_workbenches()
+
+	commands = Gui.listCommands()
+	for command in commands:
+		for wb in wb_to_clear:
+			if wb in command:
+				Gui.Command.get(command).setShortcut("")
+				print(f'Shortcut cleared: {command}')
+
+
+def load_all_workbenches():
+	workbenches = Gui.listWorkbenches()
+
+	for wb in workbenches:
+		Gui.activateWorkbench(wb)
+
+
+main()

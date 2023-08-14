@@ -1,0 +1,43 @@
+def main():
+	shortcuts = {}
+
+	load_all_workbenches()
+	commands = Gui.listCommands()
+
+	for command in commands:
+		shortcut = Gui.Command.get(command).getShortcut()
+		if shortcut != '':
+			index = command.find('_')
+			wb = command[:index]
+			short_command = command[index + 1:]
+			icon = f'/home/howie/git/shortcuts/icons/{command}.svg'
+
+			if not wb in shortcuts:
+				shortcuts[wb] = []
+			
+			shortcuts[wb].append([short_command, shortcut, icon])
+		
+	export_list(shortcuts)
+
+
+def export_list(shortcuts):
+	with open("shortcuts.md", 'w') as file:
+		file.write("# Shortcuts\n")
+
+		for wb in shortcuts.keys():
+			file.write(f'## {wb} \n')
+			file.write("| Command | Shortcut | Icon |\n")
+			file.write('| --- | --- | --- |\n')
+
+			for command in shortcuts[wb]:
+				file.write(f'| {command[0]} | `{command[1]}` | ![{command[2]}]({command[2]}) |\n')
+
+
+def load_all_workbenches():
+	workbenches = Gui.listWorkbenches()
+
+	for wb in workbenches:
+		Gui.activateWorkbench(wb)
+
+
+main()
