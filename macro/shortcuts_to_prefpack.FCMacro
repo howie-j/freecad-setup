@@ -1,0 +1,44 @@
+pre = '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<FCParameters>
+  <FCParamGroup Name="Root">
+    <FCParamGroup Name="BaseApp">
+      <FCParamGroup Name="Preferences">
+        <FCParamGroup Name="Shortcut">\n'''
+
+post = '''        </FCParamGroup>
+      </FCParamGroup>
+    </FCParamGroup>
+  </FCParamGroup>
+</FCParameters>'''
+
+
+def main():
+	load_workbenches(load='all')
+
+	filename = 'shortcuts.cfg'
+	with open(filename, 'w') as file:
+		file.write(pre)
+
+		commands = Gui.listCommands()
+		for command in commands:
+			xml_line = f'          <FCText Name="{command}">{Gui.Command.get(command).getShortcut()}</FCText>\n'
+			print(xml_line)
+			file.write(xml_line)
+		
+		file.write(post)
+
+
+def load_workbenches(load='enabled'):
+	'''
+	Only load enabled workbenches by default. Using parameter 'all' will load all workbenches.
+	'''
+
+	workbenches = Gui.listWorkbenches()
+	enabled_workbenches = list(App.ParamGet("User parameter:BaseApp/Preferences/Workbenches").GetString('Ordered').split(','))
+
+	for wb in workbenches:
+		if load == 'all' or wb in enabled_workbenches:
+			Gui.activateWorkbench(wb)
+
+
+main()
