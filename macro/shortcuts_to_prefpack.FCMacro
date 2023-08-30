@@ -26,11 +26,15 @@ def main():
 			file.write(xml_line)
 		
 		file.write(post)
+	
+	print(f'Shortcuts exported as {filename}')
 
 
 def load_workbenches(load='enabled'):
 	'''
-	Only load enabled workbenches by default. Using parameter 'all' will load all workbenches.
+	Keyword arguments:
+	load='enabled'  -- load only enabled workbenches
+	load='all'		-- load all enabled workbenches
 	'''
 
 	workbenches = Gui.listWorkbenches()

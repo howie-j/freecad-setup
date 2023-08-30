@@ -1,0 +1,2 @@
+Gui.activeDocument().activeView().viewTrimetric()
+Gui.SendMsgToActiveView("ViewFit")

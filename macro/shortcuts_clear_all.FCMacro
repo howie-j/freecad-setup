@@ -1,5 +1,5 @@
 def main():
-	load_all_workbenches()
+	load_workbenches(load='all')
 
 	commands = Gui.listCommands()
 	for command in commands:
@@ -7,11 +7,19 @@ def main():
 		print(command)
 
 
-def load_all_workbenches():
+def load_workbenches(load='enabled'):
+	'''
+	Keyword arguments:
+	load='enabled'  -- load only enabled workbenches
+	load='all'		-- load all enabled workbenches
+	'''
+
 	workbenches = Gui.listWorkbenches()
+	enabled_workbenches = list(App.ParamGet("User parameter:BaseApp/Preferences/Workbenches").GetString('Ordered').split(','))
 
 	for wb in workbenches:
-		Gui.activateWorkbench(wb)
+		if load == 'all' or wb in enabled_workbenches:
+			Gui.activateWorkbench(wb)
 
 
 main()
