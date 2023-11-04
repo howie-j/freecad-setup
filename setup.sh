@@ -1,40 +1,39 @@
 #!/bin/bash
 
-# FUNCTIONS
-# remove all freecad config folders and files
+#############################
+#	FUNCTIONS				#
+#############################
+
 cleanup () {
-    rm -rfv ~/.local/share/FreeCAD
-    rm -rfv ~/.config/FreeCAD
-    rm -rfv ~/.cache/FreeCAD
-    rm -rfv ~/.cache/qtshadercache-x86_64-little_endian-lp64
-    rm -rfv ~/.cache/mesa_shader_cache
-    rm -rfv ~/.cache/qt_compose_cache_little_endian_*
+    # remove all freecad config folders and files
+    rm -rf ~/.local/share/FreeCAD
+    rm -rf ~/.config/FreeCAD
+    rm -rf ~/.cache/FreeCAD
+    rm -rf ~/.cache/qtshadercache-x86_64-little_endian-lp64
+    rm -rf ~/.cache/mesa_shader_cache
+    rm -rf ~/.cache/qt_compose_cache_little_endian_*
 }
 
-# copy custom freecad setup
 setup_freecad () {
     # copy config "simple.cfg" to freecad config folder as user.cfg
-    mkdir -pv ~/.config/FreeCAD
-    cp -v ./config/simple.cfg ~/.config/FreeCAD/user.cfg
+    mkdir -p ~/.config/FreeCAD
+    cp ./config/simple.cfg ~/.config/FreeCAD/user.cfg
 
     # copy macro folder from git repo to home folder
-    mkdir -pv ~/.local/share/FreeCAD/Macro
-    cp -rv ./macro/. ~/.local/share/FreeCAD/Macro/
+    mkdir -p ~/.local/share/FreeCAD/Macro
+    cp -r ./macro/. ~/.local/share/FreeCAD/Macro/
 }
 
-# install addons
 addons () {
-    mkdir -pv ~/.local/share/FreeCAD/Mod
-
-    git clone https://github.com/Zolko-123/FreeCAD_Assembly4.git ~/.local/share/FreeCAD/Mod/Assembly4
-    echo "Assembly4 installed"
-
-    git clone https://github.com/DanMiel/QuickMeasure.git ~/.local/share/FreeCAD/Mod/QuickMeasure
-    echo "QuickMeasure installed"
+	# install addons
+    mkdir -p ~/.local/share/FreeCAD/Mod
+    git clone https://github.com/Zolko-123/FreeCAD_Assembly4.git ~/.local/share/FreeCAD/Mod/Assembly4 && echo "Assembly4 installed"
+    git clone https://github.com/DanMiel/QuickMeasure.git ~/.local/share/FreeCAD/Mod/QuickMeasure && echo "QuickMeasure installed"
+    git clone https://github.com/obelisk79/OpenDark.git ~/.local/share/FreeCAD/Mod/OpenDark && echo "OpenDark installed"
 }
 
-# help/usage info
 usage () {
+	# help/usage info
     echo "Usage: sh setup.sh [ -f ]  full howie freecad setup (remove all freecad config files)
                    [ -d ]  default freecad setup (remove all freecad config files)
                    [ -q ]  quick howie freecad setup (do not install addons)
@@ -43,7 +42,7 @@ usage () {
 
 
 # navigate to current directory
-cd $(dirname $(realpath $0))
+"cd $(dirname "$(realpath "$0")")"
 
 while getopts 'fdqh' OPTION; do
   case "$OPTION" in
@@ -70,4 +69,3 @@ while getopts 'fdqh' OPTION; do
       ;;
   esac
 done
-
