@@ -15,9 +15,9 @@ cleanup () {
 }
 
 setup_freecad () {
-    # copy config "simple.cfg" to freecad config folder as user.cfg
+    # copy included freecad config (user.cfg)
     mkdir -p ~/.config/FreeCAD
-    cp ./config/simple.cfg ~/.config/FreeCAD/user.cfg
+    cp ./config/user.cfg ~/.config/FreeCAD/user.cfg
 
     # copy macro folder from git repo to home folder
     mkdir -p ~/.local/share/FreeCAD/Macro
@@ -27,7 +27,6 @@ setup_freecad () {
 addons () {
 	# install addons
     mkdir -p ~/.local/share/FreeCAD/Mod
-    git clone -q https://github.com/Zolko-123/FreeCAD_Assembly4.git ~/.local/share/FreeCAD/Mod/Assembly4 && echo "Assembly4 installed"
     git clone -q https://github.com/DanMiel/QuickMeasure.git ~/.local/share/FreeCAD/Mod/QuickMeasure && echo "QuickMeasure installed"
     git clone -q https://github.com/obelisk79/OpenDark.git ~/.local/share/FreeCAD/Mod/OpenDark && echo "OpenDark installed"
 }
