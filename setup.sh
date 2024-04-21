@@ -28,7 +28,7 @@ addons () {
 	# install addons
     mkdir -p ~/.local/share/FreeCAD/Mod
     git clone -q https://github.com/DanMiel/QuickMeasure.git ~/.local/share/FreeCAD/Mod/QuickMeasure && echo "QuickMeasure installed"
-    git clone -q https://github.com/obelisk79/OpenDark.git ~/.local/share/FreeCAD/Mod/OpenDark && echo "OpenDark installed"
+    git clone -q https://github.com/obelisk79/OpenTheme.git ~/.local/share/FreeCAD/Mod/OpenTheme && echo "OpenTheme installed"
 }
 
 usage () {
