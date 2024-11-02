@@ -1,8 +1,10 @@
 #!/bin/bash
 
-#############################
-#	FUNCTIONS				#
-#############################
+
+#########################################
+#              FUNCTIONS                #
+#########################################
+
 
 cleanup () {
     # remove all freecad config folders and files
@@ -40,8 +42,13 @@ usage () {
 }
 
 
+#########################################
+#                 MAIN                  #
+#########################################
+
+
 # navigate to current directory
-cd "$(dirname "$(realpath "$0")")"
+cd "$(dirname "$(realpath "$0")")" || exit
 
 while getopts 'fdqh' OPTION; do
   case "$OPTION" in
