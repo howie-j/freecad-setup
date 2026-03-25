@@ -18,27 +18,26 @@ cleanup () {
 
 setup_freecad () {
     # copy included freecad config (user.cfg)
-    mkdir -p ~/.config/FreeCAD
-    cp ./config/user.cfg ~/.config/FreeCAD/user.cfg
+    mkdir -p ~/.config/FreeCAD/v1-1
+    cp ./config/user.cfg ~/.config/FreeCAD/v1-1/user.cfg
 
     # copy macro folder from git repo to home folder
-    mkdir -p ~/.local/share/FreeCAD/Macro
-    cp -r ./macro/. ~/.local/share/FreeCAD/Macro/
+    mkdir -p ~/.local/share/FreeCAD/v1-1/Macro
+    cp -r ./macro/. ~/.local/share/FreeCAD/v1-1/Macro/
 }
 
 addons () {
 	# install addons
-    mkdir -p ~/.local/share/FreeCAD/Mod
-    git clone -q https://github.com/DanMiel/QuickMeasure.git ~/.local/share/FreeCAD/Mod/QuickMeasure && echo "QuickMeasure installed"
-    git clone -q https://github.com/obelisk79/OpenTheme.git ~/.local/share/FreeCAD/Mod/OpenTheme && echo "OpenTheme installed"
+    mkdir -p ~/.local/share/FreeCAD/v1-1/Mod
+    # git clone -q https://github.com/obelisk79/OpenTheme.git ~/.local/share/FreeCAD/v1-1/Mod/OpenTheme && echo "OpenTheme installed"
 }
 
 usage () {
 	# help/usage info
-    echo "Usage: sh setup.sh [ -f ]  full howie freecad setup (remove all freecad config files)
-                   [ -d ]  default freecad setup (remove all freecad config files)
-                   [ -q ]  quick howie freecad setup (do not install addons)
-                   [ -h ]  help"
+    echo "Usage: sh setup.sh
+                  [ -f ]  full howie freecad setup (remove all freecad config files)
+                  [ -d ]  default freecad setup (remove all freecad config files)
+                  [ -h ]  help"
 }
 
 
@@ -62,16 +61,13 @@ while getopts 'fdqh' OPTION; do
       cleanup
       echo "FreeCAD restored to default setup."
       ;;
-    q)
-      cleanup
-      setup_freecad
-      echo "FreeCAD quick setup complete (no addons installed)"
-      ;;
     h)
       usage
       ;;
     ?)
-      usage
+      cleanup
+      setup_freecad
+      echo "FreeCAD quick setup complete (no addons installed)"
       ;;
   esac
 done
